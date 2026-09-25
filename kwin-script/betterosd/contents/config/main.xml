@@ -5,7 +5,7 @@
       http://www.kde.org/standards/kcfg/1.0/kcfg.xsd" >
   <kcfgfile name=""/>
   <group name="">
-    <entry name="Enabled" type="Bool">
+    <entry name="Reposition" type="Bool">
       <default>true</default>
     </entry>
     <entry name="Anchor" type="Int">
@@ -22,6 +22,11 @@
       <default>100</default>
       <min>0</min>
       <max>2000</max>
+    </entry>
+    <entry name="Opacity" type="Int">
+      <default>100</default>
+      <min>10</min>
+      <max>100</max>
     </entry>
   </group>
 </kcfg>

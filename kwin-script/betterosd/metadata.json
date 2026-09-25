@@ -4,9 +4,9 @@
     "X-Plasma-MainScript": "code/main.js",
     "X-KDE-ConfigModule": "kwin/effects/configs/kcm_kwin4_genericscripted",
     "KPlugin": {
-        "Id": "osdposition",
-        "Name": "OSD Position",
-        "Description": "Moves the Plasma on-screen display (volume, brightness, keyboard layout, ...) to a configurable corner, edge or the center of the screen.",
+        "Id": "betterosd",
+        "Name": "Better OSD",
+        "Description": "Moves the Plasma on-screen display (volume, brightness, keyboard layout, ...) to a configurable corner, edge or the center of the screen, and can make it translucent.",
         "Authors": [
             {
                 "Name": "Rocco Rakete",
@@ -15,7 +15,7 @@
         ],
         "License": "GPL-2.0-or-later",
         "Icon": "preferences-desktop-notification",
-        "Version": "0.1.0",
+        "Version": "0.2.0",
         "EnabledByDefault": true
     }
 }

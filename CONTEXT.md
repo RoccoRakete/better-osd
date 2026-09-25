@@ -1,6 +1,6 @@
-# OSD Position
+# Better OSD
 
-A KWin script that moves Plasma's on-screen display away from its hardcoded default position to a user-chosen place on the screen.
+A KWin script that moves Plasma's on-screen display away from its hardcoded default position to a user-chosen place on the screen and optionally makes it translucent.
 
 ## Language
 

@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
-# Installs the OSD Position KWin script for the current user and loads it
-# into the running KWin. With --package, builds osdposition.kwinscript
+# Installs the Better OSD KWin script for the current user and loads it
+# into the running KWin. With --package, builds betterosd.kwinscript
 # (for the KDE Store) instead of installing.
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-PKG="$SCRIPT_DIR/kwin-script/osdposition"
-ID=osdposition
+PKG="$SCRIPT_DIR/kwin-script/betterosd"
+ID=betterosd
 
 if [ "${1:-}" = "--package" ]; then
     OUT="$SCRIPT_DIR/$ID.kwinscript"
@@ -20,6 +20,28 @@ elif [ -n "${1:-}" ]; then
     echo "Unknown option: $1" >&2
     exit 1
 fi
+
+# 0.1.0 was called "osdposition". Remove it, or both scripts would re-place
+# the OSD with different settings, and carry its settings over.
+OLD_ID=osdposition
+if [ -d "$HOME/.local/share/kwin/scripts/$OLD_ID" ]; then
+    qdbus org.kde.KWin /Scripting org.kde.kwin.Scripting.unloadScript "$OLD_ID" >/dev/null || true
+    kpackagetool6 --type KWin/Script --remove "$OLD_ID" >/dev/null || true
+    echo "Removed old version: $OLD_ID"
+fi
+kwriteconfig6 --file kwinrc --group Plugins --key "${OLD_ID}Enabled" --delete
+migrate_key() { # old key, new key
+    local value
+    value="$(kreadconfig6 --file kwinrc --group "Script-$OLD_ID" --key "$1")"
+    if [ -n "$value" ] && [ -z "$(kreadconfig6 --file kwinrc --group "Script-$ID" --key "$2")" ]; then
+        kwriteconfig6 --file kwinrc --group "Script-$ID" --key "$2" "$value"
+    fi
+    kwriteconfig6 --file kwinrc --group "Script-$OLD_ID" --key "$1" --delete
+}
+migrate_key Enabled Reposition
+migrate_key Anchor Anchor
+migrate_key MarginX MarginX
+migrate_key MarginY MarginY
 
 if kpackagetool6 --type KWin/Script --install "$PKG" 2>/dev/null; then
     echo "Installed: $PKG"
@@ -37,4 +59,4 @@ qdbus org.kde.KWin /Scripting org.kde.kwin.Scripting.loadScript \
     "$HOME/.local/share/kwin/scripts/$ID/contents/code/main.js" "$ID" >/dev/null
 qdbus org.kde.KWin /Scripting org.kde.kwin.Scripting.start >/dev/null
 
-echo "Done. Settings: System Settings > Window Management > KWin Scripts > OSD Position."
+echo "Done. Settings: System Settings > Window Management > KWin Scripts > Better OSD."

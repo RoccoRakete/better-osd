@@ -1,10 +1,10 @@
 /*
-    OSD Position for KDE Plasma / KWin
+    Better OSD for KDE Plasma / KWin
 
     KWin places the Plasma OSD at a hardcoded spot (horizontally centered,
     2/3 down the screen, see Placement::placeOnScreenDisplay). This script
     re-anchors it to one of nine configurable positions every time it is
-    shown or resized.
+    shown or resized, and applies a configurable opacity.
 */
 
 // Anchor index: row * 3 + column, matching the combo box order in config.ui.
@@ -31,6 +31,15 @@ function computePosition(area, size, anchor, marginX, marginY) {
     };
 }
 
+// Below 10 % the OSD would be practically invisible.
+function opacityFromPercent(percent) {
+    var value = parseInt(percent, 10);
+    if (isNaN(value)) {
+        return 1;
+    }
+    return Math.min(Math.max(value, 10), 100) / 100;
+}
+
 function readBool(key, fallback) {
     var value = readConfig(key, fallback);
     return value === true || value === "true";
@@ -47,7 +56,7 @@ function isPlasmaOsd(window) {
 }
 
 function place(window) {
-    if (!readBool("Enabled", true)) {
+    if (!readBool("Reposition", true)) {
         return;
     }
     var geometry = window.frameGeometry;
@@ -74,6 +83,7 @@ function manage(window) {
         lastHeight = geometry.height;
         place(window);
     });
+    window.opacity = opacityFromPercent(readConfig("Opacity", 100));
     place(window);
 }
 
