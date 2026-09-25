@@ -10,6 +10,8 @@ A KDE Plasma 6 KWin script (plain JavaScript, `X-Plasma-API: javascript`) that r
 ./install.sh             # install/upgrade into ~/.local/share/kwin/scripts and reload it in the running KWin
 ./install.sh --package   # build betterosd.kwinscript (uses `nix shell nixpkgs#zip` if zip is missing)
 ./uninstall.sh
+nix build                # package: $out/share/kwin/scripts/betterosd
+nix flake check          # runs the QML tests in the sandbox
 ```
 
 Tests for the pure `computePosition()` and `opacityFromPercent()` (qmltestrunner is not on PATH; find it via `ls -d /nix/store/*qtdeclarative-6*/bin`):

@@ -25,6 +25,23 @@ From a checkout:
 
 Or install `betterosd.kwinscript` via System Settings > Window Management > KWin Scripts > Install from File.
 
+### NixOS (flake)
+
+```nix
+# flake.nix
+inputs.better-osd = {
+  url = "github:RoccoRakete/better-osd";
+  inputs.nixpkgs.follows = "nixpkgs";
+};
+
+# NixOS configuration
+environment.systemPackages = [
+  inputs.better-osd.packages.${pkgs.stdenv.hostPlatform.system}.default
+];
+```
+
+The script is enabled by default; configure it in System Settings as below. A copy installed with `./install.sh` in `~/.local/share/kwin/scripts` takes precedence over the system one, so remove it with `./uninstall.sh` after switching.
+
 Upgrading from 0.1.0 ("OSD Position"): `./install.sh` removes the old script and carries over its settings. If you installed from a file, remove "OSD Position" in KWin Scripts yourself and set your position and margins again.
 
 ## Configure
