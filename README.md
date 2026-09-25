@@ -9,7 +9,7 @@ Plasma has no setting for this: KWin always places the OSD horizontally centered
 - Nine positions: top/center/bottom combined with left/center/right
 - Horizontal and vertical margin in pixels, measured from the screen edge without panels, so the OSD never covers a panel
 - Keeps the OSD anchored when it changes size while visible (e.g. a volume OSD followed by a keyboard layout OSD)
-- Opacity from 10 to 100 %
+- Opacity from 10 to 100 %, relative to the Plasma style (100 % leaves the OSD as the style draws it; it cannot be made more opaque than that)
 - Stays on the screen KWin picked for the OSD
 - Only affects the Plasma OSD, not KWin's own on-screen hints
 
