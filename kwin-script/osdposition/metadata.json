@@ -1,0 +1,21 @@
+{
+    "KPackageStructure": "KWin/Script",
+    "X-Plasma-API": "javascript",
+    "X-Plasma-MainScript": "code/main.js",
+    "X-KDE-ConfigModule": "kwin/effects/configs/kcm_kwin4_genericscripted",
+    "KPlugin": {
+        "Id": "osdposition",
+        "Name": "OSD Position",
+        "Description": "Moves the Plasma on-screen display (volume, brightness, keyboard layout, ...) to a configurable corner, edge or the center of the screen.",
+        "Authors": [
+            {
+                "Name": "Rocco Rakete",
+                "Email": "m.schaumann@mscloud.uk"
+            }
+        ],
+        "License": "GPL-2.0-or-later",
+        "Icon": "preferences-desktop-notification",
+        "Version": "0.1.0",
+        "EnabledByDefault": true
+    }
+}
