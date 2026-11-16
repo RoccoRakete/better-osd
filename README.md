@@ -1,3 +1,5 @@
+> This repository has moved to https://git.mscloud.uk/martin/better-osd and is archived. Development and CI happen there.
+
 # Better OSD
 
 A KWin script for KDE Plasma 6 that moves the Plasma on-screen display (volume, brightness, keyboard layout, microphone mute, ...) to a corner, an edge or the center of the screen, and can make it translucent.
